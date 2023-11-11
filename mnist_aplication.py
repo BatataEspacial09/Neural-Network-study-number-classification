@@ -5,6 +5,25 @@ from PIL import Image
 import numpy as np
 import os
 
+def create_folder(folder_name):
+    try:
+        os.mkdir(folder_name)
+        print(f"Folder '{folder_name}' created successfully.")
+    except FileExistsError:
+        print(f"Folder '{folder_name}' already exists.")
+
+def create_folder_within_parent(parent_folder, new_folder):
+    try:
+        os.mkdir(os.path.join(parent_folder, new_folder))
+        print(f"Folder '{new_folder}' created successfully within '{parent_folder}'.")
+    except FileExistsError:
+        print(f"Folder '{new_folder}' within '{parent_folder}' already exists.")
+
+create_folder("images")
+
+create_folder_within_parent("images", "original")
+create_folder_within_parent("images", "converted")
+
 def treat_image (item, flag):
     og = Image.open(f'images/original/{item}')
     converted = og.resize((28, 28))
